@@ -2,7 +2,7 @@
 title: Find users matching a given domain
 output: users.found.json
 connection: azuread
-tag: resolve-users
+tag: external
 ---
 
 ## Step 1
@@ -12,6 +12,12 @@ $domain = "pep.pl"
 <#
 ## Step 2
 Define the output file name and path
+
+
+```powershell
+# Hint - to make current location workdir
+$env:WORKDIR = (get-location).path
+```
 #>
 $result = "$env:WORKDIR/users.found.json"
 <#

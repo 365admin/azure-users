@@ -1,6 +1,8 @@
-<#
+<#---
 title: Enable disable users
-#>
+tag: enable-disabled
+api: post
+---#>
 param(
 $domain = "pep.pl"
 )

@@ -3,6 +3,7 @@ title: Get User to resolve
 connection: sharepoint
 output: users.toresolve.json
 tag: get-users-to-resolve
+api: post
 ---
 
 ## A file is extract from SharePoint containing the users to resolve and unlock
