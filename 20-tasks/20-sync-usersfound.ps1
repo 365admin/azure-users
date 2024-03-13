@@ -33,15 +33,19 @@ write-host "Users in list: $($listItems.Count)"
 
 foreach ($listItem in $listItems) {
 
-    
+    $hash = $listItem.FieldValues.UPN + "|"
+    if ($listItem.FieldValues.AccountEnabled -eq "True") {
+        $hash += "1|"
+    }
+    else {
+        $hash += "0|"
+    }
+    $hash += $listItem.FieldValues.UserState + "|"
+    $hash += $listItem.FieldValues.UserType + "|"
     $sharePointItems.Add($listItem.FieldValues.Title, @{
-            id             = $listItem.FieldValues.ID
-            Title          = $listItem.FieldValues.Title
-            UPN            = $listItem.FieldValues.UPN
-            AccountEnabled = $listItem.FieldValues.AccountEnabled
-            UserState      = $listItem.FieldValues.UserState
-            UserType       = $listItem.FieldValues.UserType
-        })
+        id = $listItem.FieldValues.ID
+        hash = $hash})
+    
 }
 
 <#
@@ -55,14 +59,23 @@ If the user is not in SharePoint, add it
 
 write-host "Users in file: $($users.Count)"
 foreach ($user in $users) {
-    
+    $hash = $user.UserPrincipalName + "|"
+    if ($user.AccountEnabled   -eq "True") {
+        $hash += "1|"
+    }
+    else {
+        $hash += "0|"
+    }
+    $hash += $user.UserState + "|"
+    $hash += $user.UserType + "|"
     $usersInFile.Add($user.Mail, $user.ObjectId)
 
     if ($sharePointItems.ContainsKey($user.Mail)) {
+        $spItem = $sharePointItems[$user.Mail]
         # write-host "User $($user.Mail) already in SharePoint"
-        if ($user.AccountEnabled -ne $sharePointItems[$user.Mail].AccountEnabled -or $user.UserState -ne $sharePointItems[$user.Mail].UserState -or $user.UserType -ne $sharePointItems[$user.Mail].UserType) {
+        if ($hash -ne  $spItem.hash) {
             write-host "Updating $($user.Mail) in SharePoint"
-            Set-PnPListItem -List $listname -Identity $sharePointItems[$user.Mail].id -Values @{
+            Set-PnPListItem -List $listname -Identity $spItem.id -Values @{
                 "AccountEnabled" = $user.AccountEnabled 
                 "UserState"      = $user.UserState
                 "UserType"       = $user.UserType
