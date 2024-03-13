@@ -2,13 +2,15 @@
 title: Find users matching a given domain
 output: users.found.json
 connection: azuread
-tag: external
+tag: find-users
 ---
 
 ## Step 1
 Specify the domain to search for
 #>
+param(
 $domain = "pep.pl"
+)
 <#
 ## Step 2
 Define the output file name and path
