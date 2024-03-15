@@ -1,7 +1,7 @@
 <#---
 title: Get Users to MFA reset
 connection: sharepoint
-output: users.mfareset.json
+output: users.mfareset.do.json
 tag: get-users-to-mfareset
 api: post
 ---
@@ -13,7 +13,7 @@ api: post
 param ($domain = "pep.pl")
 
 $listname = "Guests $domain"
-$result = join-path  $env:WORKDIR "users.mfareset.json"
+$result = join-path  $env:WORKDIR "users.mfareset.do.json"
 
 Connect-PnPOnline -Url $ENV:SITEURL  -ClientId $PNPAPPID -Tenant $PNPTENANTID -CertificatePath "$PNPCERTIFICATEPATH"
 
