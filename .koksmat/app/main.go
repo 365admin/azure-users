@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -7,7 +6,6 @@ import (
 
 	"github.com/365admin/azure-users/magicapp"
 )
-
 
 func main() {
 	info, _ := debug.ReadBuildInfo()
