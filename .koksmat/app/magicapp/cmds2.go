@@ -43,6 +43,25 @@ func RegisterCmds() {
 	healthCmd.AddCommand(HealthCoreversionPostCmd)
 
 	RootCmd.AddCommand(healthCmd)
+	magicCmd := &cobra.Command{
+		Use:   "magic",
+		Short: "Magic Buttons",
+		Long:  `Describe the main purpose of this kitchen`,
+	}
+	MagicPepplPostCmd := &cobra.Command{
+		Use:   "pep.pl ",
+		Short: "Refresh PEP.PL users",
+		Long:  ``,
+		Args:  cobra.MinimumNArgs(0),
+		Run: func(cmd *cobra.Command, args []string) {
+			ctx := cmd.Context()
+
+			cmds.MagicPepplPost(ctx, args)
+		},
+	}
+	magicCmd.AddCommand(MagicPepplPostCmd)
+
+	RootCmd.AddCommand(magicCmd)
 	tasksCmd := &cobra.Command{
 		Use:   "tasks",
 		Short: "Tasks",
@@ -76,6 +95,22 @@ func RegisterCmds() {
 		},
 	}
 	tasksCmd.AddCommand(TasksResetUsersToMfaresetPostCmd)
+	TasksSyncGuestsPostCmd := &cobra.Command{
+		Use:   "sync-guests  domain",
+		Short: "Sync Users Found to SharePoint",
+		Long:  ``,
+		Args:  cobra.MinimumNArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			ctx := cmd.Context()
+			body, err := os.ReadFile(args[0])
+			if err != nil {
+				panic(err)
+			}
+
+			cmds.TasksSyncGuestsPost(ctx, body, args)
+		},
+	}
+	tasksCmd.AddCommand(TasksSyncGuestsPostCmd)
 
 	RootCmd.AddCommand(tasksCmd)
 	azureadCmd := &cobra.Command{
@@ -83,6 +118,18 @@ func RegisterCmds() {
 		Short: "Azure AD",
 		Long:  `Describe the main purpose of this kitchen`,
 	}
+	AzureadFindUsersPostCmd := &cobra.Command{
+		Use:   "find-users  domain",
+		Short: "Find users matching a given domain",
+		Long:  ``,
+		Args:  cobra.MinimumNArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			ctx := cmd.Context()
+
+			cmds.AzureadFindUsersPost(ctx, args)
+		},
+	}
+	azureadCmd.AddCommand(AzureadFindUsersPostCmd)
 	AzureadResetMfaPostCmd := &cobra.Command{
 		Use:   "reset-mfa ",
 		Short: "Reset MFA",

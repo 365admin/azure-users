@@ -3,6 +3,7 @@ title: Find users matching a given domain
 output: users.found.json
 connection: azuread
 tag: find-users
+api: post
 ---
 
 ## References

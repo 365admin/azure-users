@@ -3,7 +3,7 @@
 // -------------------------------------------------------------------
 /*
 ---
-title: Report Users to MFA reset
+title: Sync Users Found to SharePoint
 ---
 */
 package cmds
@@ -17,13 +17,13 @@ import (
 	"github.com/365admin/azure-users/utils"
 )
 
-func TasksResetUsersToMfaresetPost(ctx context.Context, body []byte, args []string) (*string, error) {
-	inputErr := os.WriteFile(path.Join(utils.WorkDir("azure-users"), "users.mfareset.done.json"), body, 0644)
+func TasksSyncGuestsPost(ctx context.Context, body []byte, args []string) (*string, error) {
+	inputErr := os.WriteFile(path.Join(utils.WorkDir("azure-users"), "users.found.json"), body, 0644)
 	if inputErr != nil {
 		return nil, inputErr
 	}
 
-	result, pwsherr := execution.ExecutePowerShell("john", "*", "azure-users", "20-tasks", "10 get-users-to-mfareset.done.ps1", "", "-domain", args[1])
+	result, pwsherr := execution.ExecutePowerShell("john", "*", "azure-users", "20-tasks", "20-sync-guests.ps1", "", "-domain", args[1])
 	if pwsherr != nil {
 		return nil, pwsherr
 	}

@@ -10,9 +10,7 @@ api: post
 
 #>
 
-
-
-
+koksmat trace log "Resetting UPNs"
 $users = Get-Content "$env:WORKDIR/users.mfareset.do.json" | ConvertFrom-Json
 
 $usersUpdated = @(
@@ -20,6 +18,8 @@ $usersUpdated = @(
 )
 
 foreach ($user in $users) {
+    koksmat trace log "Resetting UPN for $($user.UPN)"
+
     az ad user update --id $user.UPN --set 'user.strongAuthenticationMethods=[]'
 
     $response = @{

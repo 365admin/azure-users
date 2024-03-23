@@ -5,12 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Serve",
+            "name": "Tasks Sync Guests",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}",
-            "args": ["serve"]
+            "cwd": "${workspaceFolder}/.koksmat/app",
+            "program": "${workspaceFolder}/.koksmat/app",
+            "args": ["tasks","sync-guests","${workspaceFolder}/.koksmat/workdir/users.found.json","pep.pl","pep.pl"]
         }, 
+
+        {
+            "name": "Web",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/.koksmat/web",
+            "command": "npm run dev"
+          },
     ]
 }

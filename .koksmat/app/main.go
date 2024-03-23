@@ -23,5 +23,6 @@ description: Describe the main purpose of this kitchen
 	magicapp.Setup(".env")
 	magicapp.RegisterServeCmd("azure-users", description, "0.0.1", 8080)
 	magicapp.RegisterCmds()
+	magicapp.RegisterServiceCmd()
 	magicapp.Execute(name, "azure-users", "")
 }

@@ -1,8 +1,9 @@
 <#---
-title: Sync Guests Found to SharePoint
+title: Sync Users Found to SharePoint
 connection: sharepoint
 tag: sync-guests
 input: users.found.json
+api: post
 ---
 #>
 
