@@ -4,6 +4,7 @@ RUN apk update
 RUN apk add --upgrade powershell   
 RUN apk add go
 
+# Install module azuread
 WORKDIR /koksmat
 COPY . .
 WORKDIR /koksmat/.koksmat/app

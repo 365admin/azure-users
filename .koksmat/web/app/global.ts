@@ -1,1 +1,1 @@
-export const APPNAME = "guests"
+export const APPNAME = "users";

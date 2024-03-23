@@ -5,11 +5,16 @@ connection: azuread
 tag: find-users
 ---
 
+## References
+ https://learn.microsoft.com/en-us/azure/active-directory-b2c/user-profile-attributes
+ https://cloud.hacktricks.xyz/pentesting-cloud/azure-security/az-azuread
+
 ## Step 1
 Specify the domain to search for
 #>
 param(
-$domain = "pep.pl"
+    $domain = "pep.pl"
+    # $domain = "M365x81613217.OnMicrosoft.com"
 )
 <#
 ## Step 2
@@ -26,9 +31,16 @@ $result = "$env:WORKDIR/users.found.json"
 ## Step 3
 Load the users from Azure AD - Take all then filter them locally in memory - This can take a lot of time
 #>
-$Users = Get-AzureADUser -All:$true | Where-Object { $_.ProxyAddresses -like "*@$domain" }
+
+koksmat trace log "Finding users with external emails from $domain - This can take some minutes"
+
+$users = az ad user list --query " [? mail!=null] |  [? contains(mail,'@$domain')]" --output json
+$count = ($users | ConvertFrom-Json).Count
+koksmat trace log "Found $count users"
+
 <#
 ## Step 4 
 Write the result to file
 #>
-$Users | ConvertTo-Json -Depth 10 | Out-File -FilePath $result -Encoding utf8NoBOM
+
+$Users | Out-File -FilePath $result -Encoding utf8NoBOM

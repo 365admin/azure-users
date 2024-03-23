@@ -1,19 +1,15 @@
 <#---
-title: First Button
-description: This is the first button
-tag: first
+title: Refresh PEP.PL users
+tag: pep.pl
 icon: magic.png
 ---
 
-Table
-
-| Icon | Task |
-|------|-------------|
-| ![](magic.png)| This is the first button |
-
-
-
 #>
 
-# First Button
+koksmat trace log "Finding users with external emails from pep.pl"
 
+azure-users azuread find-users pep.pl
+
+koksmat trace log "Syncronizing with list"
+
+azure-users tasks sync-guests pep.pl
