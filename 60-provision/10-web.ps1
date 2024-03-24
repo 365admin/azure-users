@@ -10,7 +10,7 @@ $appname = "azure-users"
 $imagename = "azure-users"
 $dnsname = "azure-users.home.nexi-intra.com"
 $inputFile = join-path  $env:KITCHENROOT $appname ".koksmat", "koksmat.json"
-$port = $env:KOKSMAT_WEBPORT
+$port = 4326
 if (!(Test-Path -Path $inputFile) ) {
   Throw "Cannot find file at expected path: $inputFile"
 } 
