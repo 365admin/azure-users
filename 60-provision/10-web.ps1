@@ -52,6 +52,8 @@ spec:
           value: $($env:AZURE_AD_CLIENT_SECRET)
         - name: AZURE_AD_TENANT_ID
           value: $($env:AZURE_AD_TENANT_ID)
+        - name: NATS
+          value: nats://nats:4222
         
 ---
 apiVersion: v1

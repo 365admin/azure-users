@@ -68,5 +68,24 @@
 				"isDefault": true
 			}
 		},		
+		{
+			"type": "shell",
+			"label": "Bump, Checkin and Release ",
+			"command": "koksmat-release",
+			"args": [
+				"commit",
+				"all",
+				".",
+				"more"
+
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},				
 	]
 }
