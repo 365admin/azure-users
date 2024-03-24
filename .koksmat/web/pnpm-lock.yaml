@@ -95,6 +95,9 @@ dependencies:
   lucide-react:
     specifier: ^0.321.0
     version: 0.321.0(react@18.2.0)
+  nats:
+    specifier: ^2.19.0
+    version: 2.19.0
   nats.ws:
     specifier: ^1.19.1
     version: 1.19.1
@@ -3407,6 +3410,13 @@ packages:
       nkeys.js: 1.0.5
     dev: false
 
+  /nats@2.19.0:
+    resolution: {integrity: sha512-TuOAqPljCRpfHPo2o3midezchqYJUOOnK/YLmYf9rdoshzlYN1xvCd9dAKveVB6Bfubp/m63eN3l3ukfn43JOg==}
+    engines: {node: '>= 14.0.0'}
+    dependencies:
+      nkeys.js: 1.0.5
+    dev: false
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -3469,7 +3479,6 @@ packages:
     dependencies:
       tweetnacl: 1.0.3
     dev: false
-    optional: true
 
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
@@ -4272,7 +4281,6 @@ packages:
     resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
     requiresBuild: true
     dev: false
-    optional: true
 
   /type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
