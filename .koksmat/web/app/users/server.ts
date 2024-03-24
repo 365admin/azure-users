@@ -2,31 +2,14 @@
 import { run } from "@/magicservices/run";
 import { randomBytes } from "crypto";
 
-export async function createRooms(transactionId: string) {
-  console.log("createRooms");
-
-  return run(
-    "meeting-infrastructure.create",
-    [],
-    transactionId,
-    600,
-    transactionId
-  );
+export async function synsUsers(transactionId: string) {
+  console.log("azure-users.users.update");
+  return run("azure-users.users.update", [], transactionId, 600, transactionId);
 }
-export async function updateRooms(transactionId: string) {
-  console.log("updateRooms");
+export async function runTasks(transactionId: string) {
+  console.log("azure-users.users.runtasks");
   return run(
-    "meeting-infrastructure.update",
-    [],
-    transactionId,
-    600,
-    transactionId
-  );
-}
-export async function deleteRooms(transactionId: string) {
-  console.log("deleteRooms");
-  return run(
-    "meeting-infrastructure.delete",
+    "azure-users.users.runtasks",
     [],
     transactionId,
     600,

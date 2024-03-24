@@ -2,12 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Logo from "@/koksmat/components/logo";
 import { useContext, useEffect, useState } from "react";
-import {
-  createRooms,
-  deleteRooms,
-  getTransactionId,
-  updateRooms,
-} from "./server";
+import { synsUsers, getTransactionId, runTasks } from "./server";
 import ShowNatsLog from "./components/nats";
 import { set } from "date-fns";
 import { Result } from "@/koksmat/httphelper";
@@ -56,9 +51,8 @@ export default function CavaHome() {
     }
   }, [health]);
 
-  const doUpdate = async () => run(updateRooms);
-  const doCreate = async () => run(createRooms);
-  const doDelete = async () => run(deleteRooms);
+  const doRunTasks = async () => run(runTasks);
+  const doSyncUsers = async () => run(synsUsers);
 
   useEffect(() => {
     const load = async () => {
@@ -89,17 +83,18 @@ export default function CavaHome() {
         {health && !health.error && (
           <div>
             <div>
-              <Button disabled={running} onClick={() => doCreate()}>
+              <Button disabled={running} onClick={() => doSyncUsers()}>
                 Update List
               </Button>
             </div>
             <div>
-              <Button disabled={running} onClick={() => doUpdate()}>
+              <Button disabled={running} onClick={() => doRunTasks()}>
                 Execute Tasks
               </Button>
             </div>
           </div>
         )}
+        <ShowNatsLog subject={transactionId} />
         {/* <div>
        <Button disabled={running} onClick={()=>run()}>Change Email</Button>
        </div>

@@ -3,29 +3,21 @@ title: Web deploy to production
 tag: webdeployproduction
 api: post
 ---
-We start by finding which version tag to use
 
-eventually 
-
-nexi-booking provision webdeployproduction 
 #>
 
-$appname = "magicbutton-sharepoint"
-$imagename = "magicbutton-sharepoint"
-$dnsname = "magicbutton-sharepoint.home.nexi-intra.com"
-$inputFile = join-path  $env:KITCHENROOT $appname ".koksmat","koksmat.json"
+$appname = "azure-users"
+$imagename = "azure-users"
+$dnsname = "azure-users.home.nexi-intra.com"
+$inputFile = join-path  $env:KITCHENROOT $appname ".koksmat", "koksmat.json"
 $port = $env:KOKSMAT_WEBPORT
 if (!(Test-Path -Path $inputFile) ) {
-   Throw "Cannot find file at expected path: $inputFile"
+  Throw "Cannot find file at expected path: $inputFile"
 } 
 $json = Get-Content -Path $inputFile | ConvertFrom-Json
 $version = "v$($json.version.major).$($json.version.minor).$($json.version.patch).$($json.version.build)"
 
-<#
-The we build the deployment file
-#>
-
-$image = "ghcr.io/magicbutton/$($imagename)-web:$($version)"
+$image = "ghcr.io/365admin/$($imagename)-web:$($version)"
 
 $config = @"
 apiVersion: apps/v1
