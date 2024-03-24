@@ -10,7 +10,7 @@ api: post
 koksmat trace log koksmat-release bump patch .
 koksmat-release bump patch .
 
-koksmat trace log koksmat-release bump patch .
+koksmat trace log koksmat-release commit all .
 koksmat-release commit all .
 
 
