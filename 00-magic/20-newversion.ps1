@@ -11,7 +11,7 @@ koksmat trace log koksmat-release bump patch .
 koksmat-release bump patch .
 
 koksmat trace log koksmat-release bump patch .
-git 
+koksmat-release version commit .
 
 
 
