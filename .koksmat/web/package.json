@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev -p 4326",
-        "build": "next build",
+        "dev": "export NODE_ENV= && next dev -p 4326",
+        "build": "export NODE_ENV= && next build",
         "start": "next start -p 4326",
         "lint": "next lint"
     },

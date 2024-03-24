@@ -44,6 +44,11 @@ func UpdateUsers(req micro.Request) {
 	req.Respond(data)
 
 }
+func HealthStatus(req micro.Request) {
+
+	req.Respond([]byte("\"OK\""))
+
+}
 
 func StartMicroService() {
 	// Parent context cancels connecting/reconnecting altogether.
@@ -113,6 +118,8 @@ WaitForEstablishedConnection:
 	root := srv.AddGroup("azure-users")
 	pages := root.AddGroup("users")
 	pages.AddEndpoint("update", micro.HandlerFunc(UpdateUsers))
+	health := root.AddGroup("health")
+	health.AddEndpoint("status", micro.HandlerFunc(HealthStatus))
 	for {
 		if nc.IsClosed() {
 			break
