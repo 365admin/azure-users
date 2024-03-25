@@ -1,12 +1,15 @@
-FROM mcr.microsoft.com/azure-cli
+FROM mcr.microsoft.com/powershell
+RUN apt install curl -y
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-RUN apk update
-RUN apk add --upgrade powershell   
 RUN pwsh -c "Install-Module -Name PnP.PowerShell -Force -AllowPrerelease -Scope AllUsers;" 
 
-RUN apk add go
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt install golang-1.21 -y
+ENV GOBIN="/usr/local/bin"
+ENV PATH="/usr/lib/go-1.21/bin:${PATH}"
 
-# Install module azuread
 ENV KITCHEN_HOME="/kitchens"
 RUN go install github.com/koksmat-com/koksmat@v2.1.1.15
 
@@ -22,4 +25,3 @@ RUN go install
 
 
 CMD [ "sleep","infinity"]
-
