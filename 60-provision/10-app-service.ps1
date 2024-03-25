@@ -71,7 +71,7 @@ spec:
       - name: $appname-app
         image: $image
         command: [$appname]
-        args: ["service","-v"]               
+        args: ["service"]               
         env:
 $configEnv                           
 
