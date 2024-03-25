@@ -1,11 +1,13 @@
 FROM mcr.microsoft.com/powershell
+
+RUN apt update -y
+RUN apt upgrade -y
 RUN apt install curl -y
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 RUN pwsh -c "Install-Module -Name PnP.PowerShell -Force -AllowPrerelease -Scope AllUsers;" 
 
-RUN apt update -y
-RUN apt upgrade -y
+
 RUN apt install golang-1.21 -y
 ENV GOBIN="/usr/local/bin"
 ENV PATH="/usr/lib/go-1.21/bin:${PATH}"
